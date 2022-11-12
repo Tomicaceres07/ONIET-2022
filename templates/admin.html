@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.2.2/css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap-5.2.2/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stats.css') }}" />
+    <title id="login__title">Login Admin</title>
+    <script src="{{ url_for('static', filename='js/jquery/jquery-3.6.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chart/chart.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</head>
+<body class="d-flex flex-column mh-100 m-0">
+    <header id="login__header">
+        <div id="login__header-div">
+            <img id="login__logo" src="{{ url_for('static', filename='img/image.jpg') }}" alt="Logo">
+        </div>
+    </header>
+    <header id="admin__header">
+        <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img id="admin__logo" src="{{ url_for('static', filename='img/image.jpg') }}" alt="Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <button id="admin__button-catalogo" class="btn btn-outline-light mx-4" aria-current="page">Catálogo</button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="admin__button-estadisticas" class="btn btn-outline-light mx-4" aria-current="page">Estadísticas</button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="admin__button-logout" class="btn btn-outline-light mx-4" aria-current="page">Logout</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main id="login__main">
+        <div id="login__div">
+            <h2>Login</h2>
+            <form>
+                <div class="mb-3">
+                    <div id="email-required" class="text-danger">Requerido</div>
+                    <label for="login__email-input" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="login__email-input" aria-describedby="emailHelp" required>
+                    <div id="emailHelp" class="form-text">Nunca compartiremos tu email con nadie más.</div>
+                </div>
+                <div class="mb-3">
+                    <div id="pass-required" class="text-danger">Requerido</div>
+                    <label for="login__pass-input" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="login__pass-input" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="login__button-submit">Entrar</button> 
+            </form>
+        </div>
+    </main>
+    <main id="admin__main">
+        <div id="admin__div">
+            <h2 id="admin__hello">Hola, {usuario}</h2>
+            <!-- Catálogo -->
+            <h4 class="mt-4">Catálogo</h4>
+            <ul id="admin__catalog-list" class="list-group">
+            </ul>
+            <!-- Button trigger Add Form -->
+            <button type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#formModal">Agregar</button>
+            <!-- Add Form -->
+            <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="formModalLabel">Agregar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <div id="admin__form-name-required" class="text-danger" hidden>Requerido</div>
+                                <label for="admin__form-input-name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="admin__form-input-name" placeholder="Producto 1" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="mb-3">
+                                <div id="admin__form-desc-required" class="text-danger" hidden>Requerido</div>
+                                <label for="admin__form-input-desc" class="form-label">Descripción</label>
+                                <input type="text" class="form-control" id="admin__form-input-desc" placeholder="Producto Glorioso" required>
+                            </div>
+                            <div class="mb-3">
+                                <div id="admin__form-price-required" class="text-danger" hidden>Requerido</div>
+                                <label for="admin__form-input-price" class="form-label">Precio</label>
+                                <input type="number" class="form-control" id="admin__form-input-price" placeholder="14.00" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="admin__form-add-button">Agregar</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <main id="admin__stats">
+        <div class="container">
+            <h4 class="mt-4">Estadísticas</h4>
+            <div class="admin__stats-container">
+                <div class="admin__stats-row-header">
+                    <!-- Input Route -->
+                    <select name="route" id="admin__stats-input-route">
+                        <option value="0">-- Tipo --</option>
+                        <option value="general">General</option>
+                        <option value="host">Host</option>
+                        <option value="product">Producto</option>
+                    </select>
+                    <!-- Input Methric -->
+                    <select name="methric" id="admin__stats-input-methric" hidden>
+                        <option value="0">-- Métrica --</option>
+                        <option value="year">Año</option>
+                        <option value="month">Mes</option>
+                        <option value="day">Día</option>
+                    </select>
+                    <!-- Input Comparation -->
+                    <select name="comparation" id="admin__stats-input-comparation" hidden>
+                        <option value="0">-- ¿Comparación? --</option>
+                        <option value="no">No</option>
+                        <option value="yes">Si</option>
+                    </select>
+                </div>
+                <div class="admin__stats-row-graph">
+                    <h5 id="admin__stats-row-title" class="admin__stats-row-title" hidden>Gráfico 1</h5>
+                    <div class="admin__stats-row-content">
+                        <!-- Input Year -->
+                        <input type="number" id="admin__stats-input-year" class="admin__stats-input admin__stats-input-year" placeholder="Año" hidden>
+                        <!-- Input Month -->
+                        <select name="month" id="admin__stats-input-month" class="admin__stats-input" hidden>
+                            <option value="0">-- Mes --</option>
+                            <option value=1>Enero</option>
+                            <option value=2>Febrero</option>
+                            <option value=3>Marzo</option>
+                            <option value=4>Abril</option>
+                            <option value=5>Mayo</option>
+                            <option value=6>Junio</option>
+                        <option value=7>Julio</option>
+                        <option value=8>Agosto</option>
+                        <option value=9>Septiembre</option>
+                        <option value=10>Octubre</option>
+                        <option value=11>Noviembre</option>
+                        <option value=12>Diciembre</option>
+                    </select>
+                    <!-- Input Day -->
+                    <select name="day" id="admin__stats-input-day" class="admin__stats-input" hidden>
+                        <option value=0>-- Día --</option>
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                        <option value=6>6</option>
+                        <option value=7>7</option>
+                        <option value=8>8</option>
+                        <option value=9>9</option>
+                        <option value=10>10</option>
+                        <option value=11>11</option>
+                        <option value=12>12</option>
+                        <option value=13>13</option>
+                        <option value=14>14</option>
+                        <option value=15>15</option>
+                        <option value=16>16</option>
+                        <option value=17>17</option>
+                        <option value=18>18</option>
+                        <option value=19>19</option>
+                        <option value=20>20</option>
+                        <option value=21>21</option>
+                        <option value=22>22</option>
+                        <option value=23>23</option>
+                        <option value=24>24</option>
+                        <option value=25>25</option>
+                        <option value=26>26</option>
+                        <option value=27>27</option>
+                        <option value=28>28</option>
+                        <option value=29>29</option>
+                        <option value=30>30</option>
+                        <option value=31>31</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="admin__stats-row-graph">
+                    <h5 id="admin__stats-row-title-two" class="admin__stats-row-title" hidden>Gráfico 2</h5>
+                    <div class="admin__stats-row-content">
+                        <!-- Input YearTwo -->
+                        <input type="number" id="admin__stats-input-year-two" class="admin__stats-input admin__stats-input-year" placeholder="Año" hidden>
+                        <!-- Input MonthTwo -->
+                        <select name="month" id="admin__stats-input-month-two" class="admin__stats-input" hidden>
+                            <option value="0">-- Mes --</option>
+                            <option value=1>Enero</option>
+                            <option value=2>Febrero</option>
+                            <option value=3>Marzo</option>
+                            <option value=4>Abril</option>
+                            <option value=5>Mayo</option>
+                            <option value=6>Junio</option>
+                            <option value=7>Julio</option>
+                            <option value=8>Agosto</option>
+                            <option value=9>Septiembre</option>
+                            <option value=10>Octubre</option>
+                            <option value=11>Noviembre</option>
+                            <option value=12>Diciembre</option>
+                        </select>
+                        <!-- Input DayTwo -->
+                        <select name="day" id="admin__stats-input-day-two" class="admin__stats-input" hidden>
+                            <option value=0>-- Día --</option>
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=6>6</option>
+                            <option value=7>7</option>
+                            <option value=8>8</option>
+                            <option value=9>9</option>
+                            <option value=10>10</option>
+                            <option value=11>11</option>
+                            <option value=12>12</option>
+                            <option value=13>13</option>
+                            <option value=14>14</option>
+                            <option value=15>15</option>
+                            <option value=16>16</option>
+                            <option value=17>17</option>
+                            <option value=18>18</option>
+                            <option value=19>19</option>
+                            <option value=20>20</option>
+                            <option value=21>21</option>
+                            <option value=22>22</option>
+                            <option value=23>23</option>
+                            <option value=24>24</option>
+                            <option value=25>25</option>
+                            <option value=26>26</option>
+                            <option value=27>27</option>
+                            <option value=28>28</option>
+                            <option value=29>29</option>
+                            <option value=30>30</option>
+                            <option value=31>31</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="admin__stats-btn-show-chart">Mostrar Gráfico</button>
+            </div>
+            <div class="w-50 mh-25 mx-auto mt-5">
+                <canvas id="myChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div id="login__footer__div">
+            Desarrollado por Basa2 Team :).
+        </div>
+    </footer>
+    <script>
+        const doGet = async(url = '') => {
+            const response = await fetch(url, {
+                method: 'GET', // *GET, POST, PUT, DELETE, etc.
+                headers: {"Content-type": "application/json; charset=UTF-8"},
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
+        
+        const doPost = async(url = '', data = {}) => {
+            const response = await fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                headers: {"Content-type": "application/json; charset=UTF-8"},
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
+
+        const updateProduct = (id) => {
+
+            const formName = document.getElementById(`admin__form-update-input-name${id}`);
+            const formDesc = document.getElementById(`admin__form-update-input-desc${id}`);
+            const formPrice = document.getElementById(`admin__form-update-input-price${id}`);
+
+            const name = formName.value;
+            const desc = formDesc.value;
+            const price = formPrice.value;
+
+            console.log("Click updateProduct")
+            console.log(id);
+
+
+            let _datos = {
+                id: id,
+                name: name,
+                description: desc,
+                price: price,
+                action: "update"
+            }
+
+            console.log(_datos);
+
+            doPost('http://localhost:5000/api/catalog', _datos)
+            .then((data) => {
+                console.log(data);
+                // Fill catalog dinamically
+                doGet('http://localhost:5000/api/catalog')
+                .then((data) => {
+                    console.log(data);
+                    const catalog_list = document.getElementById("admin__catalog-list");
+                    catalog_list.innerHTML = "";
+
+                    const catalog = data.catalog
+                    catalog.forEach(product => {
+                        const li = document.createElement("li");
+                        li.className = "list-group-item";
+                        li.innerHTML = `
+                            <div class="row">
+                                <div class="col-10">
+                                    ${product.name} ${product.price}
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate" onclick="updateProduct(${product.id})">Editar</button>
+                                </div>
+                                <div class="col-1">
+                                <button class="btn btn-danger mx-2" onclick="deleteProduct(${product.id})">Borrar</button>
+                                </div>
+                            </div>
+                        `
+                        catalog_list.appendChild(li);
+                    })
+                });
+            });
+
+            $('#formModalUpdate').modal('hide');
+            $('#formModalUpdate').hide();
+            $('.modal-backdrop').hide();
+            window.location.reload();            
+            // $('.modal-backdrop').removeClass('show');
+            // formName.value = "";
+            // formDesc.value = "";
+            // formPrice.value = "";
+        }
+
+        const deleteProduct = (id) => {
+            console.log(id);
+
+            doPost("http://localhost:5000/api/catalog", {
+                "action": "delete",
+                "id": id
+            })
+            .then((data) => {
+                console.log(data);
+                // Fill catalog dinamically
+                doGet('http://localhost:5000/api/catalog')
+                    .then((data) => {
+                        const catalog_list = document.getElementById("admin__catalog-list");
+                        catalog_list.innerHTML = "";
+
+                        const catalog = data.catalog
+                        catalog.forEach(product => {
+                            const li = document.createElement("li");
+                            li.className = "list-group-item";
+                            li.innerHTML = `
+                                <div class="row">
+                                    <div class="col-10">
+                                        ${product.name} ${product.price}
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="button" class="btn btn-primary mx-2" data-bs-toggle="modal" data-bs-target="#formModalUpdate" onclick="updateProduct(${product.id})">Editar</button>
+                                    </div>
+                                    <div class="col-1">
+                                    <button class="btn btn-danger mx-2" onclick="deleteProduct(${product.id})">Borrar</button>
+                                    </div>
+                                </div>
+                            `
+                            catalog_list.appendChild(li);
+                        })
+                    });
+            });
+
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

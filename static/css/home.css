@@ -1,0 +1,50 @@
+
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer{
+    margin-top: auto;
+}
+
+/* Header */
+#home__header {
+    background-color: #212529;
+    color: white;
+}
+
+#home__logo {
+    /*background-color: white;*/
+    margin: 1em;
+    width: 10em;
+}
+
+/* Main */
+.home__catalog-btn-detail {
+    margin-top: 1em;
+    width: 8em;
+}
+
+/* Footer */
+#home__footer__div {
+    background-color: #212529;
+    color: white;
+    padding: 2em;
+    text-align: center;
+}
+
+
+@media(min-width: 576px) {
+    .home__catalog-btn-detail {
+        margin-top: 0px;
+    }
+}
+
+@media(min-width: 768px) {
+    .home__catalog-btn-detail {
+        margin-left: auto;
+    }
+}

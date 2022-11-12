@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap-5.2.2/css/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap-5.2.2/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+    <title>Home</title>
+    <script src="{{ url_for('static', filename='js/home.js') }}"></script>
+</head>
+<body>
+    <header>
+        <div id="home__header">
+            <img id="home__logo" src="{{ url_for('static', filename='img/image.jpg') }}" alt="Logo">
+        </div>
+    </header>
+    <main id="home__main">
+        <div id="home__div">
+            <!-- Catálogo -->
+            <div class="w-50 mx-auto mb-5">
+                <h4 class="mt-4">Catálogo</h4>
+                <ul id="home__catalog-list" class="list-group">
+                    
+                </ul>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div id="home__footer__div">
+            Desarrollado por Basa2 Team :).
+        </div>
+    </footer>
+    <script>
+        const doPost = async(url = '', data = {}) => {
+            const response = await fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                headers: {"Content-type": "application/json; charset=UTF-8"},
+                body: JSON.stringify(data), // body data type must match "Content-Type" header
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
+
+        const viewDetailProduct = (id) => {
+            doPost("http://localhost:5000/api/product/estadistics", {
+                "id": id
+            })
+            .then((data) => {
+                console.log(data);
+            });
+        }
+    </script>
+</body>
+</html>

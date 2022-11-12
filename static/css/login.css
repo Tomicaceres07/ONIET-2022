@@ -1,0 +1,47 @@
+.show {
+    display: block!important;
+}
+
+.hidden {
+    display: none!important;
+}
+
+/* Header */
+#login__header-div {
+    background-color: #212529;
+    color: white;
+}
+
+#login__logo {
+    margin: 1em;
+    width: 10em;
+}
+
+/* Main */
+#login__main {
+    background-color: white;
+}
+
+#login__div {
+    margin: 0px auto;
+    padding-bottom: 3em;
+    padding-top: 3em;
+    width: 40%;
+}
+
+#email-required {
+    display: none;
+}
+
+#pass-required {
+    display: none;
+}
+
+
+/* Footer */
+#login__footer__div {
+    background-color: #212529;
+    color: white;
+    padding: 2em;
+    text-align: center;
+}
